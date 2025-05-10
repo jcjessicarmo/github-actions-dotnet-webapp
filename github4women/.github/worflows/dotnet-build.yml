@@ -35,3 +35,4 @@ jobs:
 
       - name: Publish
         run: dotnet publish --configuration Release --output ./output
+        
