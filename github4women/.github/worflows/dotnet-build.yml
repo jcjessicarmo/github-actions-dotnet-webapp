@@ -1,4 +1,4 @@
-name: CI/CD Workflow
+name: Github4Women
 
 on:
   push:
@@ -11,27 +11,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+ steps:
+      - name: Checkout do código
+        uses: actions/checkout@v3
 
-      - name: Set up .NET
-        uses: actions/setup-dotnet@v1
+      - name: Rodar script ou comando
+        uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '8.0.407'  # Altere para a versão desejada
+          dotnet-version: '8.0.x'  # Ajuste para a versão que você usa
 
-      - name: Restore dependencies
-        run: dotnet restore
+      - name: Restaurar dependências
+        run: dotnet restore github4women/github4women.csproj
 
-      - name: Build
-        run: dotnet build --configuration Release
-
-      - name: Run custom script
-        run: |
-          echo "Executando script personalizado..."
-          # Adicione aqui o seu script personalizado
-          # Por exemplo, você pode executar testes ou outras tarefas necessárias
-          dotnet test
+      - name: Build do projeto
+        run: dotnet build github4women/github4women.csproj --no-restore --configuration Release
 
       - name: Publish
         run: dotnet publish --configuration Release --output ./output
