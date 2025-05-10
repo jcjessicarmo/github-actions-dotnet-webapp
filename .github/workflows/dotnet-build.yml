@@ -3,8 +3,8 @@ name: github-actions-dotnet-webapp
 on:
   push:
     branches: [ "main" ]
-  schedule:
-     - cron: '0 * * * *'  # Executa a cada hora
+  # schedule:
+  #    - cron: '0 * * * *'  # Executa a cada hora
      
 jobs:
   build:
