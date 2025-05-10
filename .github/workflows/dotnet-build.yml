@@ -1,32 +1,28 @@
-name: Github4Women
+name: github-actions-dotnet-webapp
 
 on:
   push:
-    branches:
-      - main
-  schedule:
-    - cron: '0,30 * * * *'  # Executa a cada 1h e 30 minutos
+    branches: [ "main" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
-  steps:
+    steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Rodar script ou comando
+      - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x'  # Ajuste para a versão que você usa
+          dotnet-version: 8.0.x
 
-      - name: Restaurar dependências
-        run: dotnet restore github4women/github4women.csproj
+      - name: Restore dependencies
+        run: |
+          echo "Restaurando dependências..."
+          dotnet restore **/*.csproj
 
-      - name: Build do projeto
-        run: dotnet build github4women/github4women.csproj --no-restore --configuration Release
-
-      - name: Publish
-        run: dotnet publish --configuration Release --output ./output
-
-        
+      - name: Build
+        run: |
+          echo "Compilando projeto..."
+          dotnet build **/*.csproj --no-restore
